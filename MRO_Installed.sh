@@ -23,5 +23,9 @@ cp ${INSTALL_PREFIX}/stage/Linux/bin/x64/*.so ${INSTALL_PREFIX}/lib64/R/lib
 cd ~/miniconda3/envs/MRO/
 ln -s ~/microsoft-r-open/opt/microsoft/ropen/4.0.2/lib64/R/bin
 
+#自动更正包的安装路径
+conda install r-devtools
+
 #测试
 R
+#library(devtools)
