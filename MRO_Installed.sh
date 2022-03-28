@@ -10,22 +10,20 @@ conda activate MRO
 
 #开始手动安装
 cd microsoft-r-open
-rpm -qp --scripts microsoft-r-open/rpm/rhel/microsoft-r-open-mkl-4.0.2.rpm
-rpm -qp --scripts microsoft-r-open/rpm/rhel/microsoft-r-open-mro-4.0.2.rpm
-rpm -qp --scripts microsoft-r-open/rpm/rhel/microsoft-r-open-sparklyr-4.0.2.rpm
+rpm2cpio rpm/rhel/microsoft-r-open-mkl-4.0.2.rpm|cpio -idmv
+rpm2cpio rpm/rhel/microsoft-r-open-mro-4.0.2.rpm|cpio -idmv
+rpm2cpio rpm/rhel/microsoft-r-open-sparklyr-4.0.2.rpm|cpio -idmv
 INSTALL_PREFIX="./opt/microsoft/ropen/4.0.2/" # 从前面解压的路径可以看出来
 mkdir -p ${INSTALL_PREFIX}/lib64/R/backup/lib
 mv ${INSTALL_PREFIX}/lib64/R/lib/*.so ${INSTALL_PREFIX}/lib64/R/backup/lib
 cp ${INSTALL_PREFIX}/lib64/R/backup/lib/libR.so ${INSTALL_PREFIX}/lib64/R/lib
 cp ${INSTALL_PREFIX}/stage/Linux/bin/x64/*.so ${INSTALL_PREFIX}/lib64/R/lib
 
-#建立软连接
-cd ~/miniconda3/envs/MRO/
-ln -s ~/microsoft-r-open/opt/microsoft/ropen/4.0.2/lib64/R/bin
-
-#自动更正包的安装路径
-conda install r-devtools
+#配置
+conda install r==4.0.0
+cd ~/miniconda3/envs/MRO/bin
+rm ./R
+ln -s ~/microsoft-r-open/opt/microsoft/ropen/4.0.2/lib64/R/bin/R
 
 #测试
 R
-#library(devtools)
