@@ -20,12 +20,12 @@ cp ${INSTALL_PREFIX}/lib64/R/backup/lib/libR.so ${INSTALL_PREFIX}/lib64/R/lib
 cp ${INSTALL_PREFIX}/stage/Linux/bin/x64/*.so ${INSTALL_PREFIX}/lib64/R/lib
 
 #配置
-conda install r==4.0.2
-conda install r-devtools #这两步不能省，用于配置很多必要文件
+conda install -c conda-forge r-base==4.0.2
 cd ~/miniconda3/envs/MRO/bin
 rm ./R
 ln -s ~/microsoft-r-open/opt/microsoft/ropen/4.0.2/lib64/R/bin/R
 echo R_LIBS_USER="/cluster/home/zhiguo/miniconda3/envs/MRO/lib/R/library" /cluster/home/zhiguo/microsoft-r-open/opt/microsoft/ropen/4.0.2/lib64/R/etc/Renviron #更改库的位置
+conda install r-devtools #这两步不能省，用于配置很多必要文件
 
 #测试
 R
